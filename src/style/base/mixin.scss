@@ -1,0 +1,67 @@
+// 省略号
+@mixin ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+// 多行省略
+@mixin mul-ellipsis($row: 3) {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: $row;
+
+    /*! autoprefixer: off */
+    // stylelint-disable
+    -webkit-box-orient: vertical;
+    // stylelint-enable
+}
+
+// 清除浮动
+@mixin clearfix() {
+    &::before,
+    &::after {
+        display: table;
+        content: "";
+    }
+
+    &::after {
+        clear: both;
+        overflow: hidden;
+    }
+}
+
+// flex布局
+@mixin flex-base($justify: center, $align: center, $direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+/**
+* 等边三角形
+* @param {String} 尺寸
+* @param {Color} 颜色
+* @param {String} 方向
+*/
+@mixin triangle($size: 5px, $color: rgba(0, 0, 0, 0.6), $dir: bottom) {
+    width: 0;
+    height: 0;
+    border-style: solid;
+
+    @if (bottom==$dir) {
+        border-color: $color transparent transparent transparent;
+        border-width: $size $size 0 $size;
+    } @else if (top==$dir) {
+        border-color: transparent transparent $color transparent;
+        border-width: 0 $size $size $size;
+    } @else if (right==$dir) {
+        border-color: transparent transparent transparent $color;
+        border-width: $size 0 $size $size;
+    } @else if (left==$dir) {
+        border-color: transparent $color transparent transparent;
+        border-width: $size $size $size 0;
+    }
+}

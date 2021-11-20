@@ -1,11 +1,14 @@
-# Vue 3 + Typescript + Vite
+## Vue 3 + Typescript + Vite + Element Plus
 
-# 安装依赖
-npm install
-or
+### 快速开始
+
+```
 yarn
-
-# 启动项目
-npm run dev
-or
 yarn dev
+
+```
+
+### cli 脚本手架
+
+```
+yarn cli add 文件夹路径 -n 需生成的vue文件名 -c 备注

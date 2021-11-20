@@ -1,0 +1,15 @@
+<!--
+ * {{FileName}} {{{comment}}}
+ * @author {{{author}}}
+ * @date {{date}}
+ * @since {{version}}
+ -->
+
+<script lang="ts">
+</script>
+
+<template>
+</template>
+
+<style scoped lang="scss">
+</style>
