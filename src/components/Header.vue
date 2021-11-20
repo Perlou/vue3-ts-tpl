@@ -5,11 +5,8 @@
  * @since 0.0.1
  -->
 
-<script lang="ts">
-</script>
+<script lang="ts"></script>
 
-<template>
-</template>
+<template></template>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

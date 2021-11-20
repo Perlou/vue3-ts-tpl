@@ -6,11 +6,8 @@
  -->
 
 <script lang="ts">
-    console.log(123)
 </script>
 
-<template>
-</template>
+<template></template>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
