@@ -1,12 +1,11 @@
 <!--
- * Home Home
+ * Header Header
  * @author perlou
- * @date 2021-11-20 17:19
+ * @date 2021-11-20 17:21
  * @since 0.0.1
  -->
 
 <script lang="ts">
-    console.log(123)
 </script>
 
 <template>

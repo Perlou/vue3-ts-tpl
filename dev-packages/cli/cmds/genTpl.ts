@@ -47,71 +47,51 @@ module.exports = {
 /**
  * @param src 模板路径
  * @param dest 目标路径
+ * @param targetName 文件名
  * @param metadata 元数据
  */
-async function generator(src: string, dest: string, targetName, metadata: object) {
-    let shouldOverride = false
-    if (fs.existsSync(dest + '/' + targetName + '.vue'  )) {
+async function generator(src: string, dest: string, targetName: string, metadata: object) {
+    const fullName = dest + '/' + targetName + '.vue'
+    if (fs.existsSync(fullName)) {
         const answer = await inquirer.prompt({
             type: 'confirm',
             name: 'shouldOverride',
-            message: `文件 ${dest} 已存在，是否覆盖？`,
+            message: `文件 ${fullName} 已存在，是否覆盖？`,
         })
-        shouldOverride = answer.shouldOverride
+        if (!answer.shouldOverride) return
     }
 
-    // Metalsmith(process.cwd())
-    //     .metadata(metadata)
-    //     .clean(shouldOverride) // 在这里传入是否覆盖
-    //     .source(src)
-    //     .destination(dest)
-    //     .use((files, metalsmith, done: Function) => {
-    //         const fileName = 'tpl.vue.txt'
-    //         const meta = metalsmith.metadata()
-    //         const vueFile = files[fileName]
-    //         const rename = meta['FileName'] + '.vue'
-
-    //         // const content = vueFile.contents.toString()
-    //         // vueFile.contents = Buffer.from(mustache.render(content, meta))
-    //         // vueFile.
-
-    //         // // 渲染模板
-    //         // const content = files[fileName].contents.toString()
-    //         // files[fileName].contents = Buffer.from(
-    //         //     mustache.render(content, meta)
-    //         // )
-    //         // // 文件重命名
-    //         // files[rename] = files[fileName]
-    //         // delete files[fileName]
-
-    //         // console.log(meta)
-    //         // console.log(files)
-    //         // Object.keys(files).forEach(fileName => {
-    //         //     const rename = fileName
-    //         //         .replace(/\{{(\w+)}}/gi, meta.FileName)
-    //         //         .replace(/\.txt$/, '')
-    //         //     // 渲染模板
-    //         //     const content = files[fileName].contents.toString()
-    //         //     files[fileName].contents = Buffer.from(
-    //         //         mustache.render(content, meta)
-    //         //     )
-    //         //     // 文件重命名
-    //         //     files[rename] = files[fileName]
-    //         //     delete files[fileName]
-    //         // })
-    //         done()
-    //     })
-    //     .build(err => {
-    //         if (err) {
-    //             console.error(
-    //                 `${chalk.bgRed.white(' ERROR ')} ${chalk.red(err.message)}`
-    //             )
-    //         } else {
-    //             console.log(
-    //                 chalk.bold(chalk.green(`🎉  ${dest} is generated.`))
-    //             )
-    //         }
-    //     })
+    Metalsmith(process.cwd())
+        .metadata(metadata)
+        .clean(false)
+        .source(src)
+        .destination(dest)
+        .use((files, metalsmith, done: Function) => {
+            const meta = metalsmith.metadata()
+            const fileName = 'tpl.vue.txt'
+            const vueFile = files[fileName]
+            // 渲染模版
+            const content = vueFile.contents.toString()
+            vueFile.contents = Buffer.from(
+                mustache.render(content, meta)
+            )
+            // 文件重命名
+            const rename = targetName + '.vue'
+            files[rename] = vueFile
+            delete files[fileName]
+            done()
+        })
+        .build(err => {
+            if (err) {
+                console.error(
+                    `${chalk.bgRed.white(' ERROR ')} ${chalk.red(err.message)}`
+                )
+            } else {
+                console.log(
+                    chalk.bold(chalk.green(`🎉  ${dest}/${targetName}.vue is generated.`))
+                )
+            }
+        })
 }
 
 /**
