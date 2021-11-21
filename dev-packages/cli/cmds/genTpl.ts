@@ -21,8 +21,8 @@ module.exports = {
         comment: {
             alias: 'c',
             default: '',
-            description: '注释',
-        },
+            description: '注释'
+        }
     },
     handler(args) {
         const targetPath = args.filePath as string
@@ -35,13 +35,13 @@ module.exports = {
             comment: args.comment,
             author: getGitUserName(),
             date: moment().format('YYYY-MM-DD HH:mm'),
-            version: getPkgVersion(),
+            version: getPkgVersion()
         })
     },
     help: {
-        alias: 'h',
+        alias: 'h'
     },
-    getGitUserName,
+    getGitUserName
 } as CommandModule
 
 /**
@@ -50,13 +50,18 @@ module.exports = {
  * @param targetName 文件名
  * @param metadata 元数据
  */
-async function generator(src: string, dest: string, targetName: string, metadata: object) {
+async function generator(
+    src: string,
+    dest: string,
+    targetName: string,
+    metadata: object
+) {
     const fullName = dest + '/' + targetName + '.vue'
     if (fs.existsSync(fullName)) {
         const answer = await inquirer.prompt({
             type: 'confirm',
             name: 'shouldOverride',
-            message: `文件 ${fullName} 已存在，是否覆盖？`,
+            message: `文件 ${fullName} 已存在，是否覆盖？`
         })
         if (!answer.shouldOverride) return
     }
@@ -72,23 +77,23 @@ async function generator(src: string, dest: string, targetName: string, metadata
             const vueFile = files[fileName]
             // 渲染模版
             const content = vueFile.contents.toString()
-            vueFile.contents = Buffer.from(
-                mustache.render(content, meta)
-            )
+            vueFile.contents = Buffer.from(mustache.render(content, meta))
             // 文件重命名
             const rename = targetName + '.vue'
             files[rename] = vueFile
             delete files[fileName]
             done()
         })
-        .build(err => {
+        .build((err) => {
             if (err) {
                 console.error(
                     `${chalk.bgRed.white(' ERROR ')} ${chalk.red(err.message)}`
                 )
             } else {
                 console.log(
-                    chalk.bold(chalk.green(`🎉  ${dest}/${targetName}.vue is generated.`))
+                    chalk.bold(
+                        chalk.green(`🎉  ${dest}/${targetName}.vue is generated.`)
+                    )
                 )
             }
         })

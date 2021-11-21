@@ -6,14 +6,14 @@
  -->
 
 <template>
-  <div class="header">
-    <div class="title" @click="router.push('/')">
-        Vite2.x + Vue3.x + TypeScript + Element Plus
+    <div class="header">
+        <div class="title" @click="router.push('/')">
+            Vite2.x + Vue3.x + TypeScript + Element Plus
+        </div>
+        <div class="go-github" @click="goGitHub">
+            <i class="icon el-icon-s-promotion"></i> GitHub
+        </div>
     </div>
-    <div class="go-github" @click="goGitHub">
-        <i class="icon el-icon-s-promotion"></i> GitHub
-    </div>
-  </div>
 </template>
 
 <script lang="ts" setup>
@@ -29,7 +29,7 @@ const goGitHub = () => {
 </script>
 
 <style scoped lang="scss">
-@import "@/style/base/base.scss";
+@import '@/style/base/base.scss';
 
 .header {
     width: 100%;
@@ -57,4 +57,3 @@ const goGitHub = () => {
     }
 }
 </style>
-

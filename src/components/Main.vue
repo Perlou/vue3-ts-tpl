@@ -31,7 +31,7 @@ import Header from '@/components/Header.vue'
 import Nav from '@/components/Nav.vue'
 
 export default defineComponent({
-    name: 'Main',
+    name: 'main-con',
     components: {
         Header,
         Nav
@@ -40,7 +40,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@import "@/style/base/base.scss";
+@import '@/style/base/base.scss';
 
 $top-height: 60px;
 $left-side-width: 80px;

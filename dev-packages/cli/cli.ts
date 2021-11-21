@@ -3,6 +3,6 @@ import * as yargs from 'yargs'
 
 yargs
     .commandDir('cmds', {
-        extensions: ['ts'],
+        extensions: ['ts']
     })
     .help().argv

@@ -15,12 +15,12 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    name: 'Home'
+    name: 'views-home'
 })
 </script>
 
 <style scoped lang="scss">
-@import "@/style/base/base.scss";
+@import '@/style/base/base.scss';
 
 .home-container {
     .vue-element-plus-logo {

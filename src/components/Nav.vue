@@ -6,19 +6,19 @@
  -->
 
 <template>
-  <aside class="nav">
-    <ul class="nav-list">
-      <li
-        class="nav-item flex-center"
-        v-for="(nav, index) in navList"
-        :key="index"
-        :class="{ active: nav.isActive }"
-        @click="navClick(nav)"
-      >
-        {{ nav.name }}
-      </li>
-    </ul>
-  </aside>
+    <aside class="nav">
+        <ul class="nav-list">
+            <li
+                class="nav-item flex-center"
+                v-for="(nav, index) in navList"
+                :key="index"
+                :class="{ active: nav.isActive }"
+                @click="navClick(nav)"
+            >
+                {{ nav.name }}
+            </li>
+        </ul>
+    </aside>
 </template>
 
 <script lang="ts">
@@ -26,71 +26,71 @@ import { defineComponent, reactive, toRefs, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 interface NavItem {
-  path: string
-  name: string
-  isActive: boolean
+    path: string
+    name: string
+    isActive: boolean
 }
 
 export default defineComponent({
-  name: 'Nav',
+    name: 'nav-con',
 
-  setup() {
-    const router = useRouter()
+    setup() {
+        const router = useRouter()
 
-    const reactiveData = reactive({
-      navList: [
-        {
-          name: 'Home',
-          isActive: false,
-          path: '/'
-        },
-        {
-          name: 'Axios',
-          isActive: false,
-          path: '/axios'
-        },
-        {
-          name: 'Test',
-          isActive: false,
-          path: '/test'
+        const reactiveData = reactive({
+            navList: [
+                {
+                    name: 'Home',
+                    isActive: false,
+                    path: '/'
+                },
+                {
+                    name: 'Axios',
+                    isActive: false,
+                    path: '/axios'
+                },
+                {
+                    name: 'Test',
+                    isActive: false,
+                    path: '/test'
+                }
+            ],
+
+            navClick(e: NavItem) {
+                router.push(e.path)
+            }
+        })
+
+        const changeNavActive = (currentPath: string) => {
+            reactiveData.navList.forEach((v: NavItem) => {
+                const temp = v
+                temp.isActive = temp.path === currentPath
+                return temp
+            })
         }
-      ],
 
-      navClick(e: NavItem) {
-        router.push(e.path)
-      }
-    })
+        watch(
+            () => router.currentRoute.value,
+            (_n) => {
+                changeNavActive(_n.path)
+            }
+        )
 
-    const changeNavActive = (currentPath: string) => {
-      reactiveData.navList.forEach((v: NavItem) => {
-        const temp = v
-        temp.isActive = temp.path === currentPath
-        return temp
-      })
+        onMounted(() => {
+            router.isReady().then(() => {
+                changeNavActive(router.currentRoute.value.path)
+            })
+        })
+
+        return {
+            ...toRefs(reactiveData)
+        }
     }
-
-    watch(
-      () => router.currentRoute.value,
-      (_n) => {
-        changeNavActive(_n.path)
-      }
-    )
-
-    onMounted(() => {
-      router.isReady().then(() => {
-        changeNavActive(router.currentRoute.value.path)
-      })
-    })
-
-    return {
-      ...toRefs(reactiveData)
-    }
-  }
 })
 </script>
 
 <style scoped lang="scss">
-@import "@/style/base/base.scss";
+@import '@/style/base/base.scss';
 
 .nav {
     position: relative;
