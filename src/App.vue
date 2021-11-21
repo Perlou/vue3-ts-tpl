@@ -1,18 +1,18 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from '@/components/HelloWorld.vue'
-
-// ts
-const a: Types.Test = {
-    name: '123'
-}
-console.log(a)
-</script>
-
 <template>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <Main />
 </template>
 
-<style lang="scss"></style>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import Main from '@/components/Main.vue'
+
+export default defineComponent({
+  name: 'App',
+  components: {
+    Main
+  }
+})
+</script>
+
+<style lang="scss">
+</style>

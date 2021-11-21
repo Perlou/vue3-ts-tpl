@@ -5,11 +5,13 @@
  * @since {{version}}
  -->
 
-<script lang="ts">
-</script>
-
 <template>
 </template>
 
+<script lang="ts">
+</script>
+
 <style scoped lang="scss">
+@import "@/style/base/base.scss";
+
 </style>
