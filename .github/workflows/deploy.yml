@@ -8,24 +8,24 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Setup Node.js v14.x
+      - name: Setup Node.js v14.x
         uses: actions/setup-node@v1
         with:
-        node-version: "14.x"
+          node-version: "14.x"
 
-    - name: Install
+      - name: Install
         run: npm install
 
-    - name: Build
+      - name: Build
         run: npm run build
 
-    - name: Deploy
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-        publish_dir: ./dist
-        github_token: VUE3_DEPLOY
-        user_name: Perlou
-        user_email: perloukevin@gmail.com
-        commit_message: Update Vite2.x + Vue3.x + TypeScript Starter
+          publish_dir: ./dist
+          github_token: VUE3_DEPLOY
+          user_name: Perlou
+          user_email: perloukevin@gmail.com
+          commit_message: Update Vite2.x + Vue3.x + TypeScript Starter
