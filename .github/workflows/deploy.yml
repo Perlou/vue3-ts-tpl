@@ -25,7 +25,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           publish_dir: ./dist
-          github_token: VUE3_DEPLOY
-          user_name: Perlou
-          user_email: perloukevin@gmail.com
+          github_token: ${{ secrets.GH_PAGES_DEPLOY }}
+          user_name: ${{ secrets.MY_USER_NAME }}
+          user_email: ${{ secrets.MY_USER_EMAIL }}
           commit_message: Update Vite2.x + Vue3.x + TypeScript Starter
