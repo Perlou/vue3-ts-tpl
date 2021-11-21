@@ -17,3 +17,8 @@ yarn cli add 文件夹路径 -n 需生成的vue文件名 -c 备注
 ```
 yarn build
 ```
+
+### 单元测试
+```
+yarn test
+```

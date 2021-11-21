@@ -20,6 +20,7 @@
     }
   },
   "include": [
+    "tests/*.ts",
     "tests/**/*.ts",
     "src/**/*.ts",
     "src/**/*.d.ts",

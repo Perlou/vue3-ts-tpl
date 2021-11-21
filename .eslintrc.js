@@ -1,8 +1,8 @@
 module.exports = {
     env: {
-      browser: true,
-      es2021: true,
-      node: true
+        browser: true,
+        es2021: true,
+        node: true
     },
     extends: [
         'plugin:vue/essential',
@@ -25,8 +25,8 @@ module.exports = {
         'no-param-reassign': [
             'error',
             {
-            props: true,
-            ignorePropertyModificationsFor: ['state', 'config']
+                props: true,
+                ignorePropertyModificationsFor: ['state', 'config']
             }
         ]
     },
