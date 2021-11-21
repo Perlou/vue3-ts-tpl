@@ -1,5 +1,8 @@
 ## Vue 3 + Typescript + Vite + Element Plus
 
+### 预览地址
+[vue3-ts-tpl.perlou.cn](https://vue3-ts-tpl.perlou.cn)
+
 ### 快速开始
 
 ```
