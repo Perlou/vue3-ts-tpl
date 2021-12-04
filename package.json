@@ -37,6 +37,8 @@
         }
     },
     "dependencies": {
+        "@yzfe/svgicon": "^1.1.0",
+        "@yzfe/vue3-svgicon": "^1.0.1",
         "axios": "^0.24.0",
         "element-plus": "^1.2.0-beta.3",
         "moment": "^2.29.1",
@@ -74,6 +76,7 @@
         "typescript": "^4.4.3",
         "vite": "^2.6.4",
         "vite-plugin-element-plus": "^0.0.12",
+        "vite-plugin-svgicon": "^1.0.0",
         "vue-jest": "^5.0.0-alpha.10",
         "vue-tsc": "^0.29.5",
         "yarg": "^1.0.8"

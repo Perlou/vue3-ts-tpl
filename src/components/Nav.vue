@@ -53,6 +53,11 @@ export default defineComponent({
                     name: 'Test',
                     isActive: false,
                     path: '/test'
+                },
+                {
+                    name: 'SvgIcon',
+                    isActive: false,
+                    path: '/icon'
                 }
             ],
 
