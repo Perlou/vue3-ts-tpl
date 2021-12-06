@@ -2,10 +2,17 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import importElementPlus from 'vite-plugin-element-plus'
+import svgicon from 'vite-plugin-svgicon'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue(), importElementPlus({})],
+    plugins: [
+        vue(),
+        importElementPlus({}),
+        svgicon({
+            include: ['**/svg-icon/**/*.svg']
+        })
+    ],
     resolve: {
         alias: {
             '@': resolve(__dirname, 'src')

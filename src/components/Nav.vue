@@ -66,6 +66,8 @@ export default defineComponent({
             }
         })
 
+        console.log(reactiveData)
+
         const changeNavActive = (currentPath: string) => {
             reactiveData.navList.forEach((v: NavItem) => {
                 const temp = v

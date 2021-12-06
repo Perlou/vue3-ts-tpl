@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-
 
 import Home from '@/views/Home.vue'
 import Test from '@/views/Test.vue'
+import Svgicon from '@/views/Svgicon.vue'
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -18,6 +19,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/test',
         name: 'Test',
         component: Test
+    },
+    {
+        path: '/icon',
+        name: 'Svgicon',
+        component: Svgicon
     }
 ]
 

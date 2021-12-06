@@ -27,3 +27,6 @@ yarn build
 ```
 yarn test
 ```
+
+### 使用 @yzfe/svgicon
+[文档地址](https://mmf-fe.github.io/svgicon/)
