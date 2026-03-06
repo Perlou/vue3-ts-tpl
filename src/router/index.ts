@@ -1,35 +1,73 @@
-import { createRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router'
+import '@/types/router'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-import Home from '@/views/Home.vue'
-import Test from '@/views/Test.vue'
-import Svgicon from '@/views/Svgicon.vue'
+// NProgress 配置
+NProgress.configure({ showSpinner: false })
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        name: 'Home',
-        component: Home
+        component: DefaultLayout,
+        children: [
+            {
+                path: '',
+                name: 'Home',
+                component: () => import('@/views/Home.vue'),
+                meta: { title: 'Home' }
+            },
+            {
+                path: 'axios',
+                name: 'Axios',
+                component: () => import('@/views/Axios.vue'),
+                meta: { title: 'Axios' }
+            },
+            {
+                path: 'test',
+                name: 'Test',
+                component: () => import('@/views/Test.vue'),
+                meta: { title: 'Test' }
+            }
+        ]
     },
     {
-        path: '/axios',
-        name: 'Axios',
-        component: () => import('@/views/Axios.vue') // 懒加载 Axios 组件
-    },
-    {
-        path: '/test',
-        name: 'Test',
-        component: Test
-    },
-    {
-        path: '/icon',
-        name: 'Svgicon',
-        component: Svgicon
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: () => import('@/views/NotFound.vue'),
+        meta: { title: '404', hidden: true }
     }
 ]
 
-const router: Router = createRouter({
+const router = createRouter({
     history: createWebHashHistory(),
     routes
+})
+
+// 全局前置守卫
+router.beforeEach((to, _from, next) => {
+    NProgress.start()
+
+    // 设置页面标题
+    const title = to.meta.title
+    if (title) {
+        document.title = `${title} - ${import.meta.env.VITE_APP_TITLE}`
+    }
+
+    // 权限校验示例（根据项目实际需求修改）
+    // if (to.meta.requiresAuth && !isLoggedIn()) {
+    //     next({ name: 'Login' })
+    //     return
+    // }
+
+    next()
+})
+
+// 全局后置守卫
+router.afterEach(() => {
+    NProgress.done()
 })
 
 export default router

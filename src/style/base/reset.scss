@@ -1,3 +1,5 @@
+@use './var' as var;
+
 html,
 body {
     position: relative;
@@ -5,7 +7,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    color: $font-color;
+    color: var.$font-color;
 }
 
 ul,

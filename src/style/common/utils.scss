@@ -1,7 +1,88 @@
-.fl {
-    float: left;
+/* ===== 工具类 ===== */
+
+/* Flex 布局 */
+.flex {
+    display: flex;
 }
 
-.fr {
-    float: right;
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 文本 */
+.text-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* 间距 */
+.mt-1 {
+    margin-top: 4px;
+}
+.mt-2 {
+    margin-top: 8px;
+}
+.mt-3 {
+    margin-top: 12px;
+}
+.mt-4 {
+    margin-top: 16px;
+}
+
+.mb-1 {
+    margin-bottom: 4px;
+}
+.mb-2 {
+    margin-bottom: 8px;
+}
+.mb-3 {
+    margin-bottom: 12px;
+}
+.mb-4 {
+    margin-bottom: 16px;
+}
+
+.p-1 {
+    padding: 4px;
+}
+.p-2 {
+    padding: 8px;
+}
+.p-3 {
+    padding: 12px;
+}
+.p-4 {
+    padding: 16px;
+}
+
+/* 响应式断点 */
+/* sm: >= 640px, md: >= 768px, lg: >= 1024px, xl: >= 1280px */
+@media (max-width: 768px) {
+    .hidden-sm {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hidden-md {
+        display: none !important;
+    }
 }

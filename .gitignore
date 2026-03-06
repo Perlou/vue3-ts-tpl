@@ -9,8 +9,10 @@
 # dependencies
 /node_modules
 *.local
-yarn.lock
-package-lock.json
+
+# Env local overrides (不提交到仓库)
+.env.*.local
+.env.local
 
 # IDEs and editors
 /.idea
@@ -20,13 +22,6 @@ package-lock.json
 *.launch
 .settings/
 *.sublime-workspace
-
-# IDE - VSCode
-.vscode/*
-# !.vscode/settings.json
-# !.vscode/tasks.json
-# !.vscode/launch.json
-# !.vscode/extensions.json
 
 # misc
 /.sass-cache
@@ -45,3 +40,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Auto generated
+auto-imports.d.ts
+components.d.ts

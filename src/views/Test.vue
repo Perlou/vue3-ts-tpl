@@ -1,7 +1,6 @@
 <!--
  * Test Test
  * @author perlou
- * @date 2021-11-21 13:44
  * @since 0.0.1
  -->
 
@@ -13,22 +12,15 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-    name: 'views-test',
-    setup() {
-        const count = ref<number>(0)
-        const increment = () => {
-            count.value += 1
-        }
-        return {
-            count,
-            increment
-        }
-    }
-})
+defineOptions({ name: 'ViewsTest' })
+
+const count = ref<number>(0)
+const increment = () => {
+    count.value += 1
+}
 </script>
 
 <style scoped lang="scss">

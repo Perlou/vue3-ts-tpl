@@ -1,17 +1,16 @@
 <!--
- * Nav Nav
+ * Nav 导航
  * @author perlou
- * @date 2021-11-20 17:22
- * @since 0.0.1
+ * @since 1.0.0
  -->
 
 <template>
     <aside class="nav">
         <ul class="nav-list">
             <li
-                class="nav-item flex-center"
                 v-for="(nav, index) in navList"
                 :key="index"
+                class="nav-item flex-center"
                 :class="{ active: nav.isActive }"
                 @click="navClick(nav)"
             >
@@ -21,8 +20,8 @@
     </aside>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted, watch } from 'vue'
+<script lang="ts" setup>
+import { reactive, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 interface NavItem {
@@ -31,74 +30,51 @@ interface NavItem {
     isActive: boolean
 }
 
-export default defineComponent({
-    name: 'nav-con',
+const router = useRouter()
 
-    setup() {
-        const router = useRouter()
-
-        const reactiveData = reactive({
-            navList: [
-                {
-                    name: 'Home',
-                    isActive: false,
-                    path: '/'
-                },
-                {
-                    name: 'Axios',
-                    isActive: false,
-                    path: '/axios'
-                },
-                {
-                    name: 'Test',
-                    isActive: false,
-                    path: '/test'
-                },
-                {
-                    name: 'SvgIcon',
-                    isActive: false,
-                    path: '/icon'
-                }
-            ],
-
-            navClick(e: NavItem) {
-                router.push(e.path)
-            }
-        })
-
-        console.log(reactiveData)
-
-        const changeNavActive = (currentPath: string) => {
-            reactiveData.navList.forEach((v: NavItem) => {
-                const temp = v
-                temp.isActive = temp.path === currentPath
-                return temp
-            })
-        }
-
-        watch(
-            () => router.currentRoute.value,
-            (_n) => {
-                changeNavActive(_n.path)
-            }
+const navList = reactive<NavItem[]>(
+    router
+        .getRoutes()
+        .filter(
+            (route) =>
+                route.meta &&
+                !route.meta.hidden &&
+                route.meta.title &&
+                route.path !== '/' &&
+                !route.path.includes(':')
         )
+        .map((route) => ({
+            name: (route.meta.title as string) || route.name?.toString() || '',
+            isActive: false,
+            path: route.path || '/'
+        }))
+)
 
-        onMounted(() => {
-            router.isReady().then(() => {
-                changeNavActive(router.currentRoute.value.path)
-            })
-        })
+const navClick = (e: NavItem) => {
+    router.push(e.path)
+}
 
-        return {
-            ...toRefs(reactiveData)
-        }
+const changeNavActive = (currentPath: string) => {
+    navList.forEach((v: NavItem) => {
+        v.isActive = v.path === currentPath
+    })
+}
+
+watch(
+    () => router.currentRoute.value,
+    (_n) => {
+        changeNavActive(_n.path)
     }
+)
+
+onMounted(() => {
+    router.isReady().then(() => {
+        changeNavActive(router.currentRoute.value.path)
+    })
 })
 </script>
 
 <style scoped lang="scss">
-@import '@/style/base/base.scss';
-
 .nav {
     position: relative;
     width: 100%;

@@ -1,23 +1,22 @@
 <!--
- * Main Main
+ * DefaultLayout 默认布局
  * @author perlou
- * @date 2021-11-20 17:21
- * @since 0.0.1
+ * @since 1.0.0
  -->
 
 <template>
-    <main class="main-container">
-        <div class="top">
+    <main class="layout-container">
+        <div class="layout-top">
             <Header />
         </div>
 
-        <div class="bottom">
-            <div class="left">
+        <div class="layout-bottom">
+            <div class="layout-left">
                 <Nav />
             </div>
 
-            <div class="right">
-                <div class="content">
+            <div class="layout-right">
+                <div class="layout-content">
                     <router-view />
                 </div>
             </div>
@@ -25,27 +24,16 @@
     </main>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import Header from '@/components/Header.vue'
 import Nav from '@/components/Nav.vue'
-
-export default defineComponent({
-    name: 'main-con',
-    components: {
-        Header,
-        Nav
-    }
-})
 </script>
 
 <style scoped lang="scss">
-@import '@/style/base/base.scss';
-
 $top-height: 60px;
 $left-side-width: 80px;
 
-.main-container {
+.layout-container {
     position: absolute;
     left: 0;
     right: 0;
@@ -59,7 +47,7 @@ $left-side-width: 80px;
     flex-direction: column;
     justify-content: space-between;
 
-    .top {
+    .layout-top {
         position: relative;
         box-sizing: border-box;
         width: 100%;
@@ -67,7 +55,7 @@ $left-side-width: 80px;
         margin-bottom: 10px;
     }
 
-    .bottom {
+    .layout-bottom {
         position: relative;
         box-sizing: border-box;
         width: 100%;
@@ -75,21 +63,21 @@ $left-side-width: 80px;
         display: flex;
         justify-content: space-between;
 
-        .left {
+        .layout-left {
             position: relative;
             width: $left-side-width;
             height: 100%;
             box-sizing: border-box;
         }
 
-        .right {
+        .layout-right {
             position: relative;
             width: 100%;
             height: 100%;
             box-sizing: border-box;
             padding: 0 10px 10px 10px;
 
-            .content {
+            .layout-content {
                 position: relative;
                 width: 100%;
                 height: 100%;
@@ -99,13 +87,6 @@ $left-side-width: 80px;
                 padding: 10px;
             }
         }
-    }
-}
-
-.page-links {
-    a {
-        font-weight: bold;
-        margin: 0 20px;
     }
 }
 </style>

@@ -1,8 +1,7 @@
 <!--
- * Axios Axios
+ * Axios 示例页
  * @author perlou
- * @date 2021-11-21 14:51
- * @since 0.0.1
+ * @since 1.0.0
  -->
 
 <template>
@@ -13,38 +12,38 @@
                 <template #header>
                     <div class="card-header">
                         <span>Perlou</span>
-                        <el-button class="button" type="text" @click="getUserInfo">
+                        <el-button type="primary" link @click="fetchUserInfo">
                             点击获取Perlou信息
                         </el-button>
                     </div>
                 </template>
-                <div class="info-list-box" v-loading="loading">
+                <div v-loading="loading" class="info-list-box">
                     <el-avatar
                         v-if="userInfo?.avatar_url"
                         class="item"
                         :size="80"
                         :src="userInfo?.avatar_url"
-                    ></el-avatar>
-                    <div class="text item" v-if="userInfo?.name">
+                    />
+                    <div v-if="userInfo?.name" class="text item">
                         name: {{ userInfo?.name }}
                     </div>
-                    <div class="text item" v-if="userInfo?.location">
+                    <div v-if="userInfo?.location" class="text item">
                         location: {{ userInfo?.location }}
                     </div>
-                    <div class="text item" v-if="userInfo?.company">
+                    <div v-if="userInfo?.company" class="text item">
                         company: {{ userInfo?.company }}
                     </div>
-                    <div class="text item" v-if="userInfo?.bio">
+                    <div v-if="userInfo?.bio" class="text item">
                         bio: {{ userInfo?.bio }}
                     </div>
-                    <div class="text item" v-if="userInfo?.blog">
+                    <div v-if="userInfo?.blog" class="text item">
                         blog: {{ userInfo?.blog }}
                     </div>
-                    <div class="text item" v-if="userInfo?.html_url">
+                    <div v-if="userInfo?.html_url" class="text item">
                         github:
-                        <a target="_blank" :href="userInfo?.html_url">{{
-                            userInfo?.html_url
-                        }}</a>
+                        <a target="_blank" :href="userInfo?.html_url">
+                            {{ userInfo?.html_url }}
+                        </a>
                     </div>
                 </div>
             </el-card>
@@ -52,38 +51,28 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, Ref } from 'vue'
-import api from '@/api'
+<script lang="ts" setup>
+import { ref } from 'vue'
+import { githubApi } from '@/api'
+import type { GithubUser } from '@/api'
+import { useLoading } from '@/composables'
 
-export default defineComponent({
-    name: 'views-axios',
-    setup() {
-        const userInfo: Ref = ref(null)
-        const loading = ref(false)
-        const getUserInfo = async function () {
-            loading.value = true
-            try {
-                const res = await api.github.getUserInfo()
-                userInfo.value = res.data
-            } catch (err) {
-                console.log(err)
-            }
-            loading.value = false
-        }
+defineOptions({ name: 'ViewsAxios' })
 
-        return {
-            userInfo,
-            loading,
-            getUserInfo
-        }
+const userInfo = ref<GithubUser | null>(null)
+const { loading, run } = useLoading()
+
+const fetchUserInfo = async () => {
+    try {
+        const res = await run(githubApi.getUserInfo())
+        userInfo.value = res.data
+    } catch (err) {
+        console.error(err)
     }
-})
+}
 </script>
 
 <style scoped lang="scss">
-@import '@/style/base/base.scss';
-
 .axios-container {
     .user-info-container {
         display: flex;
